@@ -1,5 +1,6 @@
 const HASH_ALGORITHM = "pbkdf2_sha256";
-const HASH_ITERATIONS = 210_000;
+const MAX_WORKER_PBKDF2_ITERATIONS = 100_000;
+const HASH_ITERATIONS = MAX_WORKER_PBKDF2_ITERATIONS;
 const SALT_BYTES = 16;
 const KEY_LENGTH_BITS = 256;
 
@@ -30,7 +31,11 @@ export async function verifyPassword(
   }
 
   const iterations = Number(iterationsValue);
-  if (!Number.isInteger(iterations) || iterations <= 0) {
+  if (
+    !Number.isInteger(iterations) ||
+    iterations <= 0 ||
+    iterations > MAX_WORKER_PBKDF2_ITERATIONS
+  ) {
     return false;
   }
 
