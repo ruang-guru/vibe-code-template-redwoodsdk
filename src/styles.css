@@ -1,15 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-lab-surface: #f7f8f2;
-  --color-lab-panel: #eef3ea;
-  --color-lab-ink: #17211d;
-  --color-lab-muted: #69736d;
-  --color-lab-line: #d6ded5;
-  --color-lab-green: #28785f;
-  --color-lab-mint: #9fe5c4;
+  --color-lab-surface: #f3fbff;
+  --color-lab-panel: #e6f6ff;
+  --color-lab-ink: #0a2540;
+  --color-lab-muted: #5e677b;
+  --color-lab-line: #d7e9f5;
+  --color-lab-green: #20a4b0;
+  --color-lab-mint: #2eb5c0;
+  --color-lab-orange: #ff823c;
+  --color-lab-red: #e52a34;
+  --color-lab-yellow: #ffd84d;
+  --color-lab-deep: #0b1759;
   --font-lab: "IBM Plex Sans", sans-serif;
-  --shadow-auth: 0 18px 60px rgb(23 33 29 / 12%);
+  --shadow-auth: 0 18px 48px rgb(10 37 64 / 16%);
+}
+
+@layer utilities {
+  .ba-hero-pattern {
+    background:
+      radial-gradient(
+        circle at 18px 18px,
+        rgb(46 181 192 / 18%) 0 3px,
+        transparent 3px
+      ),
+      linear-gradient(135deg, #f3fbff 0%, #e6f6ff 58%, #fff7df 100%);
+    background-size: 42px 42px, auto;
+  }
 }
 
 @layer base {
