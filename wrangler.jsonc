@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "cognitive-training-lab",
+  "name": "auth-template",
   "main": "src/worker.tsx",
   "compatibility_date": "2025-08-21",
   "compatibility_flags": [

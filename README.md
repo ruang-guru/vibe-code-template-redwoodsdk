@@ -1,24 +1,40 @@
-# RedwoodSDK Minimal Starter
+# RedwoodSDK Auth Starter
 
-This is the starter project for RedwoodSDK. It's a template designed to get you up and running as quickly as possible.
+A minimal RedwoodSDK template with email/password registration, password
+hashing, signed session cookies, and a protected server-rendered route.
 
-Create your new project:
-
-```shell
-npx create-rwsdk my-project-name
-cd my-project-name
-npm install
-```
-
-## Running the dev server
+## Setup
 
 ```shell
-npm run dev
+pnpm install
+pnpm run dev:init
 ```
 
-Point your browser to the URL displayed in the terminal (e.g. `http://localhost:5173/`). You should see the RedwoodSDK welcome page in your browser.
+Create a `.env` file with:
 
-## Further Reading
+```shell
+DATABASE_URL="postgres://..."
+AUTH_SECRET_KEY="replace-with-a-long-random-secret"
+```
 
-- [RedwoodSDK Documentation](https://docs.rwsdk.com/)
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers)
+Apply the auth schema:
+
+```shell
+pnpm run db:migrate
+```
+
+## Development
+
+```shell
+pnpm run dev
+```
+
+Open the URL printed by Vite, create an account, and you should be redirected
+to `/account`.
+
+## Checks
+
+```shell
+pnpm test
+pnpm run types
+```

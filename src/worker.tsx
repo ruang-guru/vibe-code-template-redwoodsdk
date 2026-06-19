@@ -4,7 +4,7 @@ import { defineApp } from "rwsdk/worker";
 import { Document } from "@/app/document";
 import { authRoutes } from "@/app/auth/routes";
 import { setCommonHeaders } from "@/app/headers";
-import { Dashboard } from "@/app/pages/dashboard";
+import { Account } from "@/app/pages/account";
 import { Home } from "@/app/pages/home";
 
 export type AppContext = {};
@@ -16,5 +16,5 @@ export default defineApp([
     ctx;
   },
   ...authRoutes,
-  render(Document, [route("/", Home), route("/dashboard", Dashboard)]),
+  render(Document, [route("/", Home), route("/account", Account)]),
 ]);

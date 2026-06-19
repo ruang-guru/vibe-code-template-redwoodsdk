@@ -1,37 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-lab-surface: #f3fbff;
-  --color-lab-panel: #e6f6ff;
-  --color-lab-ink: #0a2540;
-  --color-lab-muted: #5e677b;
-  --color-lab-line: #d7e9f5;
-  --color-lab-green: #20a4b0;
-  --color-lab-mint: #2eb5c0;
-  --color-lab-orange: #ff823c;
-  --color-lab-red: #e52a34;
-  --color-lab-yellow: #ffd84d;
-  --color-lab-deep: #0b1759;
-  --font-lab: "IBM Plex Sans", sans-serif;
-  --shadow-auth: 0 18px 48px rgb(10 37 64 / 16%);
-}
-
-@layer utilities {
-  .ba-hero-pattern {
-    background:
-      radial-gradient(
-        circle at 18px 18px,
-        rgb(46 181 192 / 18%) 0 3px,
-        transparent 3px
-      ),
-      linear-gradient(135deg, #f3fbff 0%, #e6f6ff 58%, #fff7df 100%);
-    background-size: 42px 42px, auto;
-  }
+  --color-auth-surface: #f7f9fc;
+  --color-auth-panel: #eef3f8;
+  --color-auth-ink: #172033;
+  --color-auth-muted: #617087;
+  --color-auth-line: #d7e0ea;
+  --color-auth-accent: #2563eb;
+  --color-auth-accent-strong: #1d4ed8;
+  --font-auth: "IBM Plex Sans", sans-serif;
+  --shadow-auth: 0 18px 48px rgb(23 32 51 / 12%);
 }
 
 @layer base {
   body {
-    @apply m-0 bg-lab-surface p-0 font-lab;
+    @apply m-0 bg-auth-surface p-0 font-auth;
   }
 
   input,
