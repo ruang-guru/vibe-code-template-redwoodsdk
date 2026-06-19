@@ -35,7 +35,7 @@ export const authRoutes = [
         `) as UserRow[];
 
         const headers = new Headers({
-          Location: "/?auth=registered",
+          Location: "/dashboard",
         });
         headers.append(
           "Set-Cookie",
@@ -71,7 +71,7 @@ export const authRoutes = [
       }
 
       const headers = new Headers({
-        Location: "/?auth=login",
+        Location: "/dashboard",
       });
       headers.append(
         "Set-Cookie",
