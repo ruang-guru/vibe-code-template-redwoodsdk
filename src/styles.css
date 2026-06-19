@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-beige: #f4eedf;
+  --color-orange: #f47238;
+  --color-orange-light: #ffad48;
+  --color-ink: #1a1a1a;
+  --color-code: #1b1b1b;
+  --font-noto: "Noto Sans", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    @apply m-0 bg-beige p-0;
+  }
+}
