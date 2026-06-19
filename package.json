@@ -20,7 +20,7 @@
     "release": "rw-scripts ensure-deploy-env && npm run clean && npm run build && wrangler deploy",
     "generate": "rw-scripts ensure-env && wrangler types --include-runtime false",
     "check": "npm run generate && npm run types",
-    "test": "pnpm exec node --experimental-strip-types --test tests/*.test.mjs",
+    "test": "vitest run --config vitest.config.ts",
     "types": "tsc"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "tailwindcss": "^4.3.1",
     "typescript": "6.0.3",
     "vite": "~7.3.5",
+    "vitest": "^4.1.9",
     "wrangler": "4.85.0"
   },
   "pnpm": {

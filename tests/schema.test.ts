@@ -1,18 +1,17 @@
-import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { test } from "node:test";
+import { expect, test } from "vitest";
 
 const schema = readFileSync(new URL("../db/schema.sql", import.meta.url), "utf8");
 
 test("starter schema creates the core cognitive training tables", () => {
   for (const table of ["users", "drills", "attempts"]) {
-    assert.match(schema, new RegExp(`create table if not exists ${table}\\b`, "i"));
+    expect(schema).toMatch(new RegExp(`create table if not exists ${table}\\b`, "i"));
   }
 });
 
 test("users store a password hash instead of a plaintext password", () => {
-  assert.match(schema, /\bpassword_hash\b/i);
-  assert.doesNotMatch(schema, /\bpassword\s+text\b/i);
+  expect(schema).toMatch(/\bpassword_hash\b/i);
+  expect(schema).not.toMatch(/\bpassword\s+text\b/i);
 });
 
 test("attempts capture the first analytics metrics", () => {
@@ -23,7 +22,7 @@ test("attempts capture the first analytics metrics", () => {
     "total_questions",
     "correct_answers",
   ]) {
-    assert.match(schema, new RegExp(`\\b${column}\\b`, "i"));
+    expect(schema).toMatch(new RegExp(`\\b${column}\\b`, "i"));
   }
 });
 
@@ -35,6 +34,6 @@ test("schema seeds the initial drill set", () => {
     "Quick Math",
     "Logic Check",
   ]) {
-    assert.match(schema, new RegExp(drill, "i"));
+    expect(schema).toMatch(new RegExp(drill, "i"));
   }
 });

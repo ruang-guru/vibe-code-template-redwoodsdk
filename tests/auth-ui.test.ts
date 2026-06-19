@@ -1,6 +1,5 @@
-import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { test } from "node:test";
+import { expect, test } from "vitest";
 
 const home = readFileSync(new URL("../src/app/pages/home.tsx", import.meta.url), "utf8");
 
@@ -14,6 +13,6 @@ test("home page starts with registration and login forms", () => {
     'action="/auth/register"',
     'action="/auth/login"',
   ]) {
-    assert.match(home, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    expect(home).toMatch(new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
