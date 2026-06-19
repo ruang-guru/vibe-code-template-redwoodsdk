@@ -1,17 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-beige: #f4eedf;
-  --color-orange: #f47238;
-  --color-orange-light: #ffad48;
-  --color-ink: #1a1a1a;
-  --color-code: #1b1b1b;
-  --font-noto: "Noto Sans", sans-serif;
-  --font-playfair: "Playfair Display", serif;
+  --color-lab-surface: #f7f8f2;
+  --color-lab-panel: #eef3ea;
+  --color-lab-ink: #17211d;
+  --color-lab-muted: #69736d;
+  --color-lab-line: #d6ded5;
+  --color-lab-green: #28785f;
+  --color-lab-mint: #9fe5c4;
+  --font-lab: "IBM Plex Sans", sans-serif;
+  --shadow-auth: 0 18px 60px rgb(23 33 29 / 12%);
 }
 
 @layer base {
   body {
-    @apply m-0 bg-beige p-0;
+    @apply m-0 bg-lab-surface p-0 font-lab;
+  }
+
+  input,
+  button {
+    font: inherit;
   }
 }

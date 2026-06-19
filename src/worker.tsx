@@ -2,6 +2,7 @@ import { render, route } from "rwsdk/router";
 import { defineApp } from "rwsdk/worker";
 
 import { Document } from "@/app/document";
+import { authRoutes } from "@/app/auth/routes";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/home";
 
@@ -13,5 +14,6 @@ export default defineApp([
     // setup ctx here
     ctx;
   },
+  ...authRoutes,
   render(Document, [route("/", Home)]),
 ]);

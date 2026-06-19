@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
+    "db:migrate": "sh -c 'set -a; . ./.env; set +a; psql \"$DATABASE_URL\" -f db/schema.sql'",
     "dev": "vite dev",
     "dev:init": "rw-scripts dev-init",
     "preview": "vite preview",
@@ -19,9 +20,11 @@
     "release": "rw-scripts ensure-deploy-env && npm run clean && npm run build && wrangler deploy",
     "generate": "rw-scripts ensure-env && wrangler types --include-runtime false",
     "check": "npm run generate && npm run types",
+    "test": "pnpm exec node --experimental-strip-types --test tests/*.test.mjs",
     "types": "tsc"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-server-dom-webpack": "19.2.6",
