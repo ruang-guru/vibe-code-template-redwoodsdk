@@ -1,3 +1,5 @@
+import styles from "../styles.css?url";
+
 export const Document: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
@@ -17,6 +19,7 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=optional"
         precedence="first"
       />
+      <link rel="stylesheet" href={styles} />
       <link rel="modulepreload" href="/src/client.tsx" />
     </head>
     <body>
