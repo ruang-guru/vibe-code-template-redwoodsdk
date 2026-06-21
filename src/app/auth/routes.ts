@@ -23,7 +23,7 @@ export const authRoutes = [
       const password = String(formData.get("password") ?? "");
 
       if (!name || !email || password.length < 8) {
-        return redirectToAuth("invalid");
+        return redirectToAuth("invalid", "register");
       }
 
       try {
@@ -45,7 +45,7 @@ export const authRoutes = [
         return new Response(null, { status: 303, headers });
       } catch (error) {
         if (isUniqueViolation(error)) {
-          return redirectToAuth("exists");
+          return redirectToAuth("exists", "register");
         }
 
         throw error;
@@ -83,11 +83,16 @@ export const authRoutes = [
   }),
 ];
 
-function redirectToAuth(reason: string): Response {
+function redirectToAuth(reason: string, mode?: "login" | "register"): Response {
+  const searchParams = new URLSearchParams({ auth: reason });
+  if (mode) {
+    searchParams.set("mode", mode);
+  }
+
   return new Response(null, {
     status: 303,
     headers: {
-      Location: `/?auth=${reason}`,
+      Location: `/?${searchParams.toString()}`,
     },
   });
 }

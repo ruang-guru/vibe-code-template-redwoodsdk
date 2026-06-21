@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-auth-surface: #f7f9fc;
-  --color-auth-panel: #eef3f8;
-  --color-auth-ink: #172033;
-  --color-auth-muted: #617087;
-  --color-auth-line: #d7e0ea;
-  --color-auth-accent: #2563eb;
-  --color-auth-accent-strong: #1d4ed8;
+  --color-auth-surface: #f6f4ef;
+  --color-auth-panel: #f2f5f1;
+  --color-auth-ink: #171b18;
+  --color-auth-muted: #66706a;
+  --color-auth-line: #d8ded6;
+  --color-auth-accent: #13795b;
+  --color-auth-accent-strong: #0f6048;
   --font-auth: "IBM Plex Sans", sans-serif;
   --shadow-auth: 0 18px 48px rgb(23 32 51 / 12%);
+  --shadow-auth-soft: 0 12px 28px rgb(23 32 51 / 10%);
 }
 
 @layer base {

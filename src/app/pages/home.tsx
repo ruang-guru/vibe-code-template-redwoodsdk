@@ -6,122 +6,160 @@ const authMessages: Record<string, string> = {
 };
 
 export const Home = ({ request }: { request: Request }) => {
-  const authStatus = new URL(request.url).searchParams.get("auth");
+  const searchParams = new URL(request.url).searchParams;
+  const authStatus = searchParams.get("auth");
   const authMessage = authStatus ? authMessages[authStatus] : undefined;
+  const authMode = searchParams.get("mode") === "register" ? "register" : "login";
+  const isRegisterMode = authMode === "register";
 
   return (
-    <main className="min-h-screen bg-auth-surface px-5 py-8 text-auth-ink">
-      <section className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="flex flex-col justify-center">
-          <p className="m-0 text-sm font-bold uppercase text-auth-muted">
-            Authentication Starter
+    <main className="min-h-screen bg-auth-surface px-5 py-8 text-auth-ink sm:px-8 lg:px-10">
+      <section className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="max-w-2xl">
+          <p className="m-0 text-sm font-bold uppercase tracking-[0.22em] text-auth-accent">
+            Vibe Code Template
           </p>
-          <h1 className="m-0 mt-3 text-4xl font-bold leading-tight sm:text-5xl">
-            A clean sign-in flow for your next app.
+          <h1 className="m-0 mt-4 text-4xl font-bold leading-tight text-auth-ink sm:text-6xl">
+            A clean RedwoodSDK starter for full-stack apps.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-auth-muted">
-            Register a user, hash their password, issue a signed session cookie,
-            and protect server-rendered routes.
+            Authentication, database wiring, protected routes, and deployment-ready
+            defaults in a small template you can reshape quickly.
           </p>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {[
+              "Email/password auth",
+              "Signed session cookies",
+              "Protected account route",
+              "Postgres-ready schema",
+            ].map((feature) => (
+              <div
+                className="flex items-center gap-3 rounded-lg border border-auth-line bg-white/70 px-4 py-3 text-sm font-bold shadow-auth-soft"
+                key={feature}
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-auth-accent" />
+                {feature}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-6">
+        <div className="mx-auto grid w-full max-w-md gap-4">
           {authMessage ? (
             <p className="m-0 rounded-lg border border-auth-line bg-white p-4 text-sm font-bold shadow-auth">
               {authMessage}
             </p>
           ) : null}
 
-          <form
-            action="/auth/register"
-            className="grid gap-4 rounded-lg border border-auth-line bg-white p-5 shadow-auth sm:p-6"
-            id="register"
-            method="post"
-          >
-            <h2 className="m-0 text-2xl font-bold">Create account</h2>
+          <div className="rounded-lg border border-auth-line bg-white p-5 shadow-auth sm:p-6">
+            {isRegisterMode ? (
+              <form action="/auth/register" className="grid gap-4" id="register" method="post">
+                <div>
+                  <h2 className="m-0 text-2xl font-bold">Create account</h2>
+                  <p className="m-0 mt-2 text-sm leading-6 text-auth-muted">
+                    Start with a name, email, and secure password.
+                  </p>
+                </div>
 
-            <label className="grid gap-2 text-sm font-bold">
-              Name
-              <input
-                autoComplete="name"
-                className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
-                name="name"
-                placeholder="Ada Lovelace"
-                required
-                type="text"
-              />
-            </label>
+                <label className="grid gap-2 text-sm font-bold">
+                  Name
+                  <input
+                    autoComplete="name"
+                    className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
+                    name="name"
+                    placeholder="Ada Lovelace"
+                    required
+                    type="text"
+                  />
+                </label>
 
-            <label className="grid gap-2 text-sm font-bold">
-              Email
-              <input
-                autoComplete="email"
-                className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
-                name="email"
-                placeholder="ada@example.com"
-                required
-                type="email"
-              />
-            </label>
+                <label className="grid gap-2 text-sm font-bold">
+                  Email
+                  <input
+                    autoComplete="email"
+                    className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
+                    name="email"
+                    placeholder="ada@example.com"
+                    required
+                    type="email"
+                  />
+                </label>
 
-            <label className="grid gap-2 text-sm font-bold">
-              Password
-              <input
-                autoComplete="new-password"
-                className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
-                minLength={8}
-                name="password"
-                placeholder="At least 8 characters"
-                required
-                type="password"
-              />
-            </label>
+                <label className="grid gap-2 text-sm font-bold">
+                  Password
+                  <input
+                    autoComplete="new-password"
+                    className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
+                    minLength={8}
+                    name="password"
+                    placeholder="At least 8 characters"
+                    required
+                    type="password"
+                  />
+                </label>
 
-            <button
-              className="mt-2 h-12 cursor-pointer rounded-lg border-0 bg-auth-accent px-4 text-base font-bold text-white shadow-auth transition hover:bg-auth-accent-strong focus:outline-2 focus:outline-offset-2 focus:outline-auth-accent"
-              type="submit"
-            >
-              Create account
-            </button>
-          </form>
+                <button
+                  className="mt-2 h-12 cursor-pointer rounded-lg border-0 bg-auth-accent px-4 text-base font-bold text-white shadow-auth-soft transition hover:bg-auth-accent-strong focus:outline-2 focus:outline-offset-2 focus:outline-auth-accent"
+                  type="submit"
+                >
+                  Create account
+                </button>
 
-          <form
-            action="/auth/login"
-            className="grid gap-4 rounded-lg border border-auth-line bg-white p-5 shadow-auth sm:p-6"
-            id="login"
-            method="post"
-          >
-            <h2 className="m-0 text-2xl font-bold">Welcome back</h2>
+                <p className="m-0 border-t border-auth-line pt-4 text-center text-sm text-auth-muted">
+                  Already have an account?{" "}
+                  <a className="font-bold text-auth-accent" href="/">
+                    Sign in
+                  </a>
+                </p>
+              </form>
+            ) : (
+              <form action="/auth/login" className="grid gap-4" id="login" method="post">
+                <div>
+                  <h2 className="m-0 text-2xl font-bold">Welcome back</h2>
+                  <p className="m-0 mt-2 text-sm leading-6 text-auth-muted">
+                    Sign in to open the protected account route.
+                  </p>
+                </div>
 
-            <label className="grid gap-2 text-sm font-bold">
-              Email
-              <input
-                autoComplete="email"
-                className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
-                name="email"
-                required
-                type="email"
-              />
-            </label>
+                <label className="grid gap-2 text-sm font-bold">
+                  Email
+                  <input
+                    autoComplete="email"
+                    className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
+                    name="email"
+                    required
+                    type="email"
+                  />
+                </label>
 
-            <label className="grid gap-2 text-sm font-bold">
-              Password
-              <input
-                autoComplete="current-password"
-                className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
-                name="password"
-                required
-                type="password"
-              />
-            </label>
+                <label className="grid gap-2 text-sm font-bold">
+                  Password
+                  <input
+                    autoComplete="current-password"
+                    className="h-12 rounded-lg border border-auth-line bg-auth-panel px-3 text-base outline-none transition focus:border-auth-accent focus:bg-white"
+                    name="password"
+                    required
+                    type="password"
+                  />
+                </label>
 
-            <button
-              className="h-12 cursor-pointer rounded-lg border border-auth-accent bg-white px-4 text-base font-bold text-auth-accent transition hover:bg-auth-panel focus:outline-2 focus:outline-offset-2 focus:outline-auth-accent"
-              type="submit"
-            >
-              Sign in
-            </button>
-          </form>
+                <button
+                  className="h-12 cursor-pointer rounded-lg border-0 bg-auth-accent px-4 text-base font-bold text-white shadow-auth-soft transition hover:bg-auth-accent-strong focus:outline-2 focus:outline-offset-2 focus:outline-auth-accent"
+                  type="submit"
+                >
+                  Sign in
+                </button>
+
+                <p className="m-0 border-t border-auth-line pt-4 text-center text-sm text-auth-muted">
+                  New here?{" "}
+                  <a className="font-bold text-auth-accent" href="/?mode=register">
+                    Create an account
+                  </a>
+                </p>
+              </form>
+            )}
+          </div>
         </div>
       </section>
     </main>
