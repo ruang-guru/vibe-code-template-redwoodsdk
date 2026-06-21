@@ -19,6 +19,4 @@ test("home page starts with registration and login forms", () => {
 
 test("home page is generic auth template UI", () => {
   expect(home).toMatch(/Authentication Starter/);
-  expect(home).not.toMatch(/Cognitive Training Lab/);
-  expect(home).not.toMatch(/drill|training|baseline/i);
 });

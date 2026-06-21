@@ -1,4 +1,4 @@
-const COOKIE_NAME = "ctl_session";
+const COOKIE_NAME = "auth_session";
 
 const encoder = new TextEncoder();
 

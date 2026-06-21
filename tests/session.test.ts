@@ -9,7 +9,7 @@ import {
 test("auth cookie hides the raw user id behind a signed value", async () => {
   const cookie = await createAuthCookie("user-123", "test-secret");
 
-  expect(cookie).toMatch(/^ctl_session=/);
+  expect(cookie).toMatch(/^auth_session=/);
   expect(cookie).not.toMatch(/user-123/);
 });
 
